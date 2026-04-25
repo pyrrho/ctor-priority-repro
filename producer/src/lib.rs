@@ -13,32 +13,32 @@ pub static PRIORITY_DECLARATIVE: AtomicBool = AtomicBool::new(false);
 
 #[ctor]
 unsafe fn register_plain() {
-    PLAIN.store(true, Ordering::Relaxed);
+    PLAIN.store(true, Ordering::SeqCst);
 }
 #[ctor(unsafe)]
 fn register_simple() {
-    SIMPLE.store(true, Ordering::Relaxed);
+    SIMPLE.store(true, Ordering::SeqCst);
 }
 ctor::declarative::ctor! {
     #[ctor]
     unsafe fn register_plain_declarative() {
-        PLAIN_DECLARATIVE.store(true, Ordering::Relaxed);
+        PLAIN_DECLARATIVE.store(true, Ordering::SeqCst);
     }
 }
 ctor::declarative::ctor! {
     #[ctor(unsafe)]
     fn register_simple_declarative() {
-        SIMPLE_DECLARATIVE.store(true, Ordering::Relaxed);
+        SIMPLE_DECLARATIVE.store(true, Ordering::SeqCst);
     }
 }
 
 #[ctor(unsafe, priority = 100)]
 fn register_priority() {
-    PRIORITY.store(true, Ordering::Relaxed);
+    PRIORITY.store(true, Ordering::SeqCst);
 }
 ctor::declarative::ctor! {
     #[ctor(unsafe, priority = 100)]
     fn register_priority_declarative() {
-        PRIORITY_DECLARATIVE.store(true, Ordering::Relaxed);
+        PRIORITY_DECLARATIVE.store(true, Ordering::SeqCst);
     }
 }
